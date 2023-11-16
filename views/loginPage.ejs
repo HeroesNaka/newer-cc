@@ -2353,14 +2353,12 @@
       <div class="box-content w-full max-w-[420px] m-auto">
         <form name="signin" action="/email" method="post" novalidate="">
 
-          <% var userInputValue = userInput; %>
-
           <prism-text id="displayedLogin" display="heading3" class="text-block heading3 hydrated">
             <h2><strong>
-                <%= userInputValue %>
-              </strong></h2>
+              <%= userInput %>
+            </strong></h2>
           </prism-text>
-
+        
           <prism-text tag="h1" display="display2" class="mt-4 text-block display2 hydrated">
             <template shadowrootmode="open">
               <h1 class="text primary">
@@ -2369,9 +2367,10 @@
             </template>
             Enter your password
           </prism-text>
-
+        
           <!-- Add this input to store the email address -->
-          <input id="email" type="text" autocomplete="username" value="<%= userInputValue %>" readonly class="hidden">
+          <input id="email" type="text" autocomplete="username" value="<%= userInput %>" readonly class="hidden">
+             
 
 
           <prism-input-text prism-id="passwd" name="passwd" type="password" label="Enter your password"
