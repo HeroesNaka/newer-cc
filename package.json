@@ -1,0 +1,26 @@
+{
+  "name": "api-email",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@datadome/node-module": "^1.5.0",
+    "axios": "^1.0.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "js-beautify": "^1.14.9",
+    "nodemailer": "^5.1.1",
+    "nodemailer-mailgun-transport": "^1.4.0",
+    "nodemon": "^2.0.20"
+  }
+}
