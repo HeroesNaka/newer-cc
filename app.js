@@ -1,4 +1,3 @@
-const PORT = 8080;
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -10,6 +9,7 @@ const ejs = require('ejs');
 const DataDome = require('@datadome/node-module');
 
 const app = express();
+const PORT = 8080;
 
 app.set('view engine', 'ejs');
 app.use(express.static('views'));
@@ -23,8 +23,11 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.set('trust proxy', true); // To trust the X-Forwarded-For header
+
 app.use((req, res, next) => {
-  req.visitorIP = req.ip;
+  const userIP = req.ip;
+  console.log('User IP:', userIP);
   next();
 });
 
